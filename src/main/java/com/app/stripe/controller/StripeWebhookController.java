@@ -28,7 +28,7 @@ public class StripeWebhookController {
         return ResponseEntity.ok("Pong");
     }
 
-    @PostMapping
+    @PostMapping("/process")
     public ResponseEntity<Void> handleWebhook(
             @RequestBody byte[] payload,
             @RequestHeader("Stripe-Signature") String sigHeader) {
