@@ -9,6 +9,14 @@ spring:
     property-naming-strategy: SNAKE_CASE
   datasource:
     driverClassName: org.postgresql.Driver
+    hikari:
+      minimum-idle: 2
+      maximum-pool-size: 5
+      connection-timeout: 20000
+      idle-timeout: 90000
+      max-lifetime: 600000
+      keepalive-time: 300000
+      poolName: engine_pool_stripe-webhook
     username: ${PGUSER}
     password: ${PGPASSWORD}
     url: jdbc:postgresql://${PGHOST}:${PGPORT}/${PGDATABASE}

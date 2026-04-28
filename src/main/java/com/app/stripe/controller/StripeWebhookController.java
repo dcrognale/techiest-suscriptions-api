@@ -20,7 +20,7 @@ public class StripeWebhookController {
     private final IdempotencyGuard idempotencyGuard;
     private final EventStrategyRouter eventStrategyRouter;
 
-    @PostMapping("/ping")
+    @GetMapping("/ping")
     public ResponseEntity<String> ping() {
         log.info("Ping received - info");
         log.error("Ping received - error");
