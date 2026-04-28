@@ -1,6 +1,29 @@
+server:
+  port: 80
+
 spring:
   application:
     name: stripe-webhook
+
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+  datasource:
+    driverClassName: org.postgresql.Driver
+    password: postgres
+    url: jdbc:postgresql://localhost:5432/subscription_api_db
+    username: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    show-sql: false
+    properties:
+      hibernate:
+        current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
+        default_schema: public
+        jdbc:
+          lob:
+            non_contextual_creation: true
 
 stripe:
   secret-key: ${STRIPE_SECRET_KEY:}
