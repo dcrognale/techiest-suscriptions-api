@@ -1,5 +1,5 @@
 # Build stage
-FROM eclipse-temurin:21-jdk-alpine AS builder
+FROM eclipse-temurin:21-jdk-jammy AS builder
 WORKDIR /app
 COPY gradlew .
 COPY gradle gradle
@@ -9,7 +9,7 @@ RUN chmod +x gradlew
 RUN ./gradlew bootJar --no-daemon
 
 # Run stage
-FROM eclipse-temurin:21-jre-alpine
+FROM eclipse-temurin:21-jre-jammy
 WORKDIR /app
 COPY --from=builder /app/build/libs/*-SNAPSHOT.jar app.jar
 EXPOSE 8080
