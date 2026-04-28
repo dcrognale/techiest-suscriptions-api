@@ -1,0 +1,82 @@
+POST http://localhost:80/webhook
+Content-Type: application/json
+Content-Length: 8
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.7
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+[
+  ""
+]
+
+<> 2026-04-28T063947.400.json
+
+###
+
+POST http://localhost:80/webhook
+Content-Type: application/json
+Content-Length: 1308
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.1.7
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "id": "evt_1TR1AmL3UxT1B0TbccZvUbI4",
+  "object": "event",
+  "api_version": "2026-04-22.dahlia",
+  "created": 1777342489,
+  "data": {
+    "object": {
+      "id": "cus_UPqs8BbXYayptN",
+      "object": "customer",
+      "address": {
+        "city": null,
+        "country": "AR",
+        "line1": null,
+        "line2": null,
+        "postal_code": null,
+        "state": null
+      },
+      "balance": 0,
+      "created": 1777342489,
+      "currency": null,
+      "customer_account": null,
+      "default_source": null,
+      "delinquent": false,
+      "description": null,
+      "discount": null,
+      "email": "jmc.crognale@gmail.com",
+      "invoice_prefix": "CSUDIBCE",
+      "invoice_settings": {
+        "custom_fields": null,
+        "default_payment_method": null,
+        "footer": null,
+        "rendering_options": null
+      },
+      "livemode": false,
+      "metadata": {},
+      "name": "Juani Crog",
+      "next_invoice_sequence": 2,
+      "phone": null,
+      "preferred_locales": [
+        "en-US",
+        "es-419"
+      ],
+      "shipping": null,
+      "tax_exempt": "none",
+      "test_clock": null
+    }
+  },
+  "livemode": false,
+  "pending_webhooks": 1,
+  "request": {
+    "id": null,
+    "idempotency_key": "b40693a2-a26d-4812-b4ac-145efdae34d9"
+  },
+  "type": "customer.created"
+}
+
+<> 2026-04-28T063935.400.json
+
+###
+

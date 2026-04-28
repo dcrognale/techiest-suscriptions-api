@@ -1,5 +1,5 @@
 server:
-  port: ${PORT:8080}
+  port: 80
 
 spring:
   application:
@@ -9,9 +9,9 @@ spring:
     property-naming-strategy: SNAKE_CASE
   datasource:
     driverClassName: org.postgresql.Driver
-    password: ${PGPASSWORD:postgres}
-    url: jdbc:postgresql://${PGHOST:localhost}:${PGPORT:5432}/${PGDATABASE:subscription_api_db}
-    username: ${PGUSER:postgres}
+    username: ${PGUSER}
+    password: ${PGPASSWORD}
+    url: jdbc:postgresql://${PGHOST}:${PGPORT}/${PGDATABASE}
   jpa:
     hibernate:
       ddl-auto: update
