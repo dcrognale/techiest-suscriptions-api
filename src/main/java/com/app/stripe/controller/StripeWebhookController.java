@@ -33,6 +33,8 @@ public class StripeWebhookController {
             @RequestBody byte[] payload,
             @RequestHeader("Stripe-Signature") String sigHeader) {
 
+        log.info("Webhook consuming...");
+
         Event event;
         try {
             event = signatureVerifier.verifyAndConstructEvent(payload, sigHeader);
