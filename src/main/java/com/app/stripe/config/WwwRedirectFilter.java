@@ -22,11 +22,16 @@ public class WwwRedirectFilter extends OncePerRequestFilter {
           @NonNull FilterChain filterChain) throws ServletException, IOException {
 
     String host = request.getHeader("Host");
+    String requestUri = request.getRequestURI();
+
+    if (requestUri.startsWith("/webhook")) {
+      filterChain.doFilter(request, response);
+      return;
+    }
 
     if (host != null && host.startsWith("www.")) {
-      String nonWwwHost = host.substring(4); // elimina "www."
+      String nonWwwHost = host.substring(4);
       String queryString = request.getQueryString();
-      String requestUri = request.getRequestURI();
 
       String redirectUrl = request.getScheme()
               + "://"
@@ -36,7 +41,7 @@ public class WwwRedirectFilter extends OncePerRequestFilter {
 
       log.info("WWW redirect: {} → {}", host + requestUri, redirectUrl);
       response.setHeader("Location", redirectUrl);
-      response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY); // 301
+      response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
       return;
     }
 
