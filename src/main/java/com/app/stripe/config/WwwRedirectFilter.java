@@ -6,13 +6,23 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.lang.NonNull;
-import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.List;
 
 @Slf4j
 public class WwwRedirectFilter extends OncePerRequestFilter {
+
+  /**
+   * Prefijos que NUNCA deben recibir un redirect.
+   * Stripe trata cualquier respuesta 3xx como fallo de entrega del webhook.
+   * https://support.stripe.com/questions/webhooks-what-to-do-when-the-http-status-code-starts-with-a-three-(3xx)
+   */
+  private static final List<String> BYPASS_PREFIXES = List.of(
+          "/webhook",
+          "/actuator"
+  );
 
   @Override
   protected void doFilterInternal(
@@ -20,14 +30,16 @@ public class WwwRedirectFilter extends OncePerRequestFilter {
           @NonNull HttpServletResponse response,
           @NonNull FilterChain filterChain) throws ServletException, IOException {
 
-    String host = request.getHeader("Host");
     String requestUri = request.getRequestURI();
 
-    if (requestUri.startsWith("/webhook") || requestUri.startsWith("/actuator")) {
+    // Cortocircuito: nunca redirigir estos endpoints
+    boolean isBypassUri = BYPASS_PREFIXES.stream().anyMatch(requestUri::startsWith);
+    if (isBypassUri) {
       filterChain.doFilter(request, response);
       return;
     }
 
+    String host = request.getHeader("Host");
     if (host != null && host.startsWith("www.")) {
       String nonWwwHost = host.substring(4);
       String queryString = request.getQueryString();
