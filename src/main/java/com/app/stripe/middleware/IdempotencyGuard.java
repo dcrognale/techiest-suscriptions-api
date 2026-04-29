@@ -1,6 +1,6 @@
 package com.app.stripe.middleware;
 
-import com.app.stripe.store.IdempotencyStore;
+import com.app.stripe.persistence.store.IdempotencyStore;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 @Slf4j
 public class IdempotencyGuard {
-    
+
     private final IdempotencyStore store;
 
     public boolean checkAndSet(String eventId) {
@@ -19,7 +19,7 @@ public class IdempotencyGuard {
         }
         return false;
     }
-    
+
     public void markCompleted(String eventId) {
         store.markProcessed(eventId);
     }

@@ -41,3 +41,10 @@ out/
 
 .env
 .env*
+
+### IA ###
+.agents
+.claude
+.devin
+.kiro
+.windsurf

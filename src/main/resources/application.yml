@@ -17,9 +17,9 @@ spring:
       max-lifetime: 600000
       keepalive-time: 300000
       poolName: engine_pool_stripe-webhook
-    username: ${PGUSER}
-    password: ${PGPASSWORD}
-    url: jdbc:postgresql://${PGHOST}:${PGPORT}/${PGDATABASE}
+    username: ${SUPAUSER}
+    password: ${SUPAPASSWORD}
+    url: jdbc:postgresql://${SUPAHOST}:${SUPAPORT}/${SUPADATABASE}
   jpa:
     hibernate:
       ddl-auto: update
