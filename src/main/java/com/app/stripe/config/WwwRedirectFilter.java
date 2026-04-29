@@ -24,7 +24,7 @@ public class WwwRedirectFilter extends OncePerRequestFilter {
     String host = request.getHeader("Host");
     String requestUri = request.getRequestURI();
 
-    if (requestUri.startsWith("/webhook")) {
+    if (requestUri.startsWith("/webhook") || requestUri.startsWith("/actuator")) {
       filterChain.doFilter(request, response);
       return;
     }
