@@ -31,7 +31,7 @@ public class CheckoutCompletedHandler implements EventHandler {
         String whatsapp = null;
         if (session.getCustomFields() != null) {
             whatsapp = session.getCustomFields().stream()
-                    .filter(f -> "whatsapp".equals(f.getKey()))
+                    .filter(f -> "whatsapp".equalsIgnoreCase(f.getKey()))
                     .findFirst()
                     .map(f -> f.getText().getValue())
                     .orElse(null);
