@@ -7,8 +7,12 @@ spring:
 
   jackson:
     property-naming-strategy: SNAKE_CASE
+
   datasource:
-    driverClassName: org.postgresql.Driver
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${SUPAHOST}:${SUPAPORT}/${SUPADATABASE}
+    username: ${SUPAUSER}
+    password: ${SUPAPASSWORD}
     hikari:
       minimum-idle: 2
       maximum-pool-size: 5
@@ -16,19 +20,16 @@ spring:
       idle-timeout: 90000
       max-lifetime: 600000
       keepalive-time: 300000
-      poolName: engine_pool_stripe-webhook
-    username: ${SUPAUSER}
-    password: ${SUPAPASSWORD}
-    url: jdbc:postgresql://${SUPAHOST}:${SUPAPORT}/${SUPADATABASE}
+      pool-name: engine_pool_stripe-webhook
+
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     open-in-view: false
     show-sql: false
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-        current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
         default_schema: public
         jdbc:
           lob:
