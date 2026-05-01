@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -27,8 +28,9 @@ public class EventStrategyRouter {
     }
 
     public void route(String eventType, Event event) {
+        log.info("Handling route event: {}", eventType);
         EventHandler handler = handlerMap.get(eventType);
-        if (handler != null) {
+        if ( Objects.nonNull(handler)) {
             handler.handle(event);
         } else {
             log.info("No handler found for event type: {}", eventType);

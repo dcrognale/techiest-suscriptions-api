@@ -1,18 +1,18 @@
 package com.app.stripe.strategy;
 
-import com.app.stripe.logging.EventLogger;
 import com.stripe.model.Event;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class CustomerCreatedHandler implements EventHandler {
-    private final EventLogger logger;
 
     @Override
     public void handle(Event event) {
-        logger.logMessage("Handling: " + getEventType());
+        log.info("Handling: " + getEventType());
     }
 
     @Override

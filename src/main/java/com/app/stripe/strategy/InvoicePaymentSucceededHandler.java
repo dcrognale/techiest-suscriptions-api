@@ -23,7 +23,7 @@ public class InvoicePaymentSucceededHandler implements EventHandler {
 
     @Override
     public void handle(Event event) {
-        logger.logMessage("Handling: " + getEventType());
+        log.info("Handling: " + getEventType());
 
         try {
             String rawData = event.getData().toJson();
