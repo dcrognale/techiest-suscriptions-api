@@ -37,15 +37,21 @@ public class InvoicePaymentSucceededHandler implements EventHandler {
             InvoiceData invoice = payload.object();
             String email = invoice.customerEmail();
             String name = invoice.customerName();
+            String phone = invoice.customerPhone();
 
             if (Objects.isNull(email) || email.isBlank()) {
                 log.error("Customer email is missing in invoice {}, cannot create user", invoice.id());
                 return;
             }
 
+            if (Objects.isNull(phone) || phone.isBlank()) {
+                log.error("Customer phone is missing in invoice {}, cannot create user", invoice.id());
+                return;
+            }
+
             log.info("Processing invoice for customer: {} ({})", name, email);
 
-            createClientViaSupabaseFunction(email, name);
+            createClientViaSupabaseFunction(email, name, phone);
 
         } catch (com.fasterxml.jackson.core.JsonProcessingException e) {
             log.error("Error parsing invoice event JSON payload: {}", e.getMessage(), e);
@@ -54,8 +60,8 @@ public class InvoicePaymentSucceededHandler implements EventHandler {
         }
     }
 
-    private void createClientViaSupabaseFunction(String email, String displayName) {
-        String sql = "SELECT public.admin_create_client_transactional(?, ?, ?, ?)";
+    private void createClientViaSupabaseFunction(String email, String displayName, String phone) {
+        String sql = "SELECT public.admin_create_client_transactional(?, ?, ?, ?, ?)";
 
         try {
             UUID createdUserId = jdbcTemplate.queryForObject(
@@ -64,7 +70,8 @@ public class InvoicePaymentSucceededHandler implements EventHandler {
                     email,
                     Objects.requireNonNullElse(displayName, ""),
                     true,
-                    "trainer");
+                    "trainer",
+                    phone);
 
             log.info("Client created successfully via admin_create_client_transactional | userId: {} | email: {}",
                     createdUserId, email);
