@@ -12,7 +12,7 @@ public class CustomerCreatedHandler implements EventHandler {
 
     @Override
     public void handle(Event event) {
-        logger.logMessage("New customer registered");
+        logger.logMessage("Handling: " + getEventType());
     }
 
     @Override

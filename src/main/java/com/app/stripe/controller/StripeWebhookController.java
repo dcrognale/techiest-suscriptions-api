@@ -32,14 +32,13 @@ public class StripeWebhookController {
      * Cualquier código 3xx es tratado como fallo de entrega.
      * El procesamiento real se delega asincrónicamente vía EventStrategyRouter.
      *
-     * @see <a href="https://docs.stripe.com/webhooks#best-practices">Stripe Webhook Best Practices</a>
+     * @see <a href="https://docs.stripe.com/webhooks#best-practices">Stripe Webhook
+     *      Best Practices</a>
      */
     @PostMapping("/process")
     public ResponseEntity<Void> handleWebhook(
             @RequestBody byte[] payload,
             @RequestHeader("Stripe-Signature") String sigHeader) {
-
-        log.info("Webhook received, verifying signature...");
 
         // 1. Verificar firma SIEMPRE antes de cualquier procesamiento
         Event event;
