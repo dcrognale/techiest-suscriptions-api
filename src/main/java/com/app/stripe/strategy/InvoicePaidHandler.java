@@ -12,7 +12,6 @@ public class InvoicePaidHandler implements EventHandler {
 
     @Override
     public void handle(Event event) {
-        logger.logEventStart(event);
         logger.logMessage("Invoice payment recorded");
     }
 

@@ -18,7 +18,7 @@ spring:
       maximum-pool-size: 5
       connection-timeout: 20000
       idle-timeout: 90000
-      max-lifetime: 600000
+      max-lifetime: 600000git ad
       keepalive-time: 300000
       pool-name: engine_pool_stripe-webhook
 

@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 public class EventLogger {
 
     public void logEventStart(Event event) {
-        log.info("eventId=\"{}\" eventType=\"{}\" timestamp=\"{}\" payload={}", 
-                 event.getId(), event.getType(), event.getCreated(), event.toJson());
+        log.info("eventId=\"{}\" eventType=\"{}\" timestamp=\"{}\"",
+                event.getId(), event.getType(), event.getCreated());
     }
 
     public void logMessage(String message) {

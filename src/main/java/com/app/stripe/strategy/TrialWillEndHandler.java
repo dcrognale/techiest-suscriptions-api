@@ -12,7 +12,6 @@ public class TrialWillEndHandler implements EventHandler {
 
     @Override
     public void handle(Event event) {
-        logger.logEventStart(event);
         logger.logMessage("Trial ending soon — customer notified");
     }
 
