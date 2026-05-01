@@ -61,7 +61,7 @@ public class InvoicePaymentSucceededHandler implements EventHandler {
     }
 
     private void createClientViaSupabaseFunction(String email, String displayName, String phone) {
-        String sql = "SELECT public.admin_create_client_transactional(?, ?, ?, ?, ?)";
+        String sql = "SELECT public.admin_create_client_transactional_from_checkout(?, ?, ?)";
 
         try {
             UUID createdUserId = jdbcTemplate.queryForObject(
@@ -69,11 +69,9 @@ public class InvoicePaymentSucceededHandler implements EventHandler {
                     UUID.class,
                     email,
                     Objects.requireNonNullElse(displayName, ""),
-                    true,
-                    "trainer",
                     phone);
 
-            log.info("Client created successfully via admin_create_client_transactional | userId: {} | email: {}",
+            log.info("Client created successfully via admin_create_client_transactional_from_checkout | userId: {} | email: {}",
                     createdUserId, email);
 
         } catch (DataAccessException e) {
@@ -84,7 +82,7 @@ public class InvoicePaymentSucceededHandler implements EventHandler {
             } else if (errorMessage.contains("El email ya está registrado en perfiles de usuario")) {
                 log.warn("Duplicate email in custom_users: {}. Profile already exists, skipping creation.", email);
             } else {
-                log.error("Database error calling admin_create_client_transactional for email: {} | error: {}",
+                log.error("Database error calling admin_create_client_transactional_from_checkout for email: {} | error: {}",
                         email, errorMessage, e);
             }
         }
