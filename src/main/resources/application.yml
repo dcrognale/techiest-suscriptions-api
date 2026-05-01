@@ -10,7 +10,7 @@ spring:
 
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgres:${SUPAPASSWORD}@${SUPAHOST}:${SUPAPORT}/${SUPADATABASE}
+    url: ${SUPADATABASE_URL}
     username: ${SUPAUSER}
     password: ${SUPAPASSWORD}
     hikari:
