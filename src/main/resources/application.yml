@@ -19,7 +19,7 @@ spring:
       poolName: engine_pool_stripe-webhook
     username: ${SUPAUSER}
     password: ${SUPAPASSWORD}
-    url: jdbc:postgresql://${SUPAHOST}:${SUPAPORT}/${SUPADATABASE}
+    url: postgresql://postgres:${SUPAPASSWORD}@${SUPAHOST}:${SUPAPORT}/${SUPADATABASE}
   jpa:
     hibernate:
       ddl-auto: update
